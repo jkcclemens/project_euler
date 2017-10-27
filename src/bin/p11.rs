@@ -51,6 +51,7 @@ const TABLE: [[u64; 20]; 20] = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
 
+// FIXME: this doesn't actually have to be a macro
 macro_rules! bigger {
   ($biggest:expr, $x:expr) => {{
     let x = $x;
@@ -59,6 +60,8 @@ macro_rules! bigger {
     }
   }}
 }
+
+// FIXME: pretty sure I only need to do half of the diagonals, since they should cover each other
 
 fn main() {
   let mut biggest = 0;
