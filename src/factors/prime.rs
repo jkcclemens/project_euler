@@ -16,7 +16,7 @@ impl<T> Iterator for PrimeFactors<T>
   type Item = T;
 
   fn next(&mut self) -> Option<Self::Item> {
-    if self.x == T::one() {
+    if self.x == T::one() || self.x == T::zero() {
       return None;
     }
     let two = T::one() + T::one();
