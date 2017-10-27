@@ -12,7 +12,7 @@
 use std::cmp::max;
 
 fn main() {
-  let triangle: [Vec<u8>; 15] = [
+  let mut triangle: [Vec<u16>; 15] = [
     vec![75],
     vec![95, 64],
     vec![17, 47, 82],
@@ -30,34 +30,13 @@ fn main() {
     vec![4, 62, 98, 27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 4, 23]
   ];
 
-  let mut sum: u32 = 0;
-  let mut pos: usize = 0;
-  for (i, row) in triangle.iter().enumerate() {
-    if sum == 0 {
-      // at the start
-      sum += row[pos] as u32;
-      continue;
+  for i in 1..triangle.len() + 1 {
+    let i = triangle.len() - i;
+    if i == 0 {
+      println!("{}", triangle[i][0]);
     }
-    if triangle.len() > i + 1 {
-      // if there's another row
-      let next_row = &triangle[i + 1];
-      // get the maximum possible value of the three possible values in the next row
-      let next_max = max(max(next_row[pos], next_row[pos + 1]), *next_row.get(pos + 2).unwrap_or(&0));
-      if next_max == *next_row.get(pos + 2).unwrap_or(&0) && next_max - max(next_row[pos], *next_row.get(pos + 1).unwrap_or(&0)) > (row[pos] as i64 - row[pos + 1] as i64).abs() as u8 {
-        // get the cost of taking a loss on this choice and compare it to the net gain from the next
-        // choice. if the net gain is more than the loss, move and take the loss, if not, continue
-        // also please forgive me for the if statement from hell
-        pos += 1;
-      } else if row[pos + 1] > row[pos] {
-        // choose the bigger one
-        pos += 1;
-      }
-    } else if row[pos + 1] > row[pos] {
-      // last row, just check if it's bigger
-      pos += 1;
+    for c in 0..triangle[i].len() - 1 {
+      triangle[i - 1][c] += max(triangle[i][c], triangle[i][c + 1]);
     }
-    // println!("{}", row[pos]); // uncomment to see the path (minus the first non-choice)
-    sum += row[pos] as u32;
   }
-  println!("{}", sum);
 }
