@@ -11,14 +11,14 @@
 // Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
 
 fn main() {
-  let sum: u64 = (2..10_000_000)
+  let sum: u64 = (2..354_295)
     .filter(|&i| i == (0..(i as f32).log10().floor() as u8 + 1).map(|n| digit(i, n).pow(5)).sum())
     .sum();
   println!("{}", sum);
 }
 
-/// Gets the `n`th digit **from the right**, starting at index 0, supporting up to 8 digits.
+/// Gets the `n`th digit **from the right**, starting at index 0, supporting up to 6 digits.
 fn digit(x: u64, n: u8) -> u64 {
-  const POWERS: [u64; 8] = [1, 10, 100, 1000, 10_000, 100_000, 1_000_000, 10_000_000];
+  const POWERS: [u64; 6] = [1, 10, 100, 1000, 10_000, 100_000];
   (x / POWERS[n as usize]) % 10
 }
