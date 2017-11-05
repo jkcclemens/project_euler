@@ -9,7 +9,7 @@ fn factors_128() {
 
 #[test]
 fn prime_factors_128() {
-  assert_eq!(vec![2, 2, 2, 2, 2, 2, 2], PrimeFactors::new(128).collect::<Vec<_>>());
+  assert_eq!(vec![2; 7], PrimeFactors::new(128).collect::<Vec<_>>());
 }
 
 #[test]
