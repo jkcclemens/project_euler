@@ -27,7 +27,7 @@ fn main() {
     let eq_pos = nums.iter().position(|x| x == &Kind::Equals).unwrap();
 
     let multiplicand = &nums[..mult_pos];
-    if multiplicand.is_empty() || multiplicand.contains(&&Kind::Equals) {
+    if multiplicand.is_empty() || multiplicand.contains(&Kind::Equals) {
       continue;
     }
     let multiplicand = combine(multiplicand);

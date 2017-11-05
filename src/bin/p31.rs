@@ -15,6 +15,7 @@ fn main() {
   poss[0] = 1;
 
   for i in 0..coin_sizes.len() {
+    #[cfg_attr(feature="cargo-clippy", allow(needless_range_loop))]
     for j in coin_sizes[i]..goal + 1 {
       poss[j] += poss[j - coin_sizes[i]];
     }
