@@ -15,7 +15,7 @@ fn main() {
 }
 
 fn difference(n: f32) -> f32 {
-  let s = ((n * (n + 1.0)) / 2.0).powf(2.0);
+  let s = ((n * (n + 1.0)) / 2.0).powi(2);
   let s2 = ((2.0 * n) + 1.0) * (n + 1.0) * n / 6.0;
   s - s2
 }
