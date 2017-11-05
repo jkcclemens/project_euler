@@ -27,11 +27,9 @@ fn main() {
       let mut n_chars: Vec<char> = num.to_string().chars().collect();
       let mut d_chars: Vec<char> = den.to_string().chars().collect();
       let mut share = None;
-      for n in 0..n_chars.len() {
-        for d in 0..d_chars.len() {
-          if n_chars[n] == d_chars[d] {
-            share = Some(n_chars[n]);
-          }
+      for c in &n_chars {
+        if d_chars.contains(c) {
+          share = Some(*c);
         }
       }
       let share = match share {
