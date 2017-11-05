@@ -6,3 +6,4 @@ extern crate itertools;
 pub mod primality;
 pub mod factors;
 pub mod precision;
+pub mod quadratics;
