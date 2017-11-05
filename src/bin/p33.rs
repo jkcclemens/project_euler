@@ -20,29 +20,16 @@ fn main() {
   let mut total_ratio = Ratio::new(1, 1);
 
   for num in 10..100 {
-    for den in 10..100 {
-      if num >= den {
+    let (num_1, num_2) = (num / 10, num % 10);
+    for den in num + 1..100 {
+      let (den_1, den_2) = (den / 10, den % 10);
+      let (new_num, new_den) = if num_1 == den_2 && den_1 != 0 {
+        (num_2, den_1)
+      } else if num_2 == den_1 && den_2 != 0 {
+        (num_1, den_2)
+      } else {
         continue;
-      }
-      let mut n_chars: Vec<char> = num.to_string().chars().collect();
-      let mut d_chars: Vec<char> = den.to_string().chars().collect();
-      let mut share = None;
-      for c in &n_chars {
-        if d_chars.contains(c) {
-          share = Some(*c);
-        }
-      }
-      let share = match share {
-        Some(s) if s != '0' => s,
-        _ => continue
       };
-      n_chars.remove_item(&share).unwrap();
-      d_chars.remove_item(&share).unwrap();
-      let new_num: u32 = n_chars.iter().collect::<String>().parse().unwrap();
-      let new_den: u32 = d_chars.iter().collect::<String>().parse().unwrap();
-      if new_den == 0 {
-        continue;
-      }
       let rat = Ratio::new(num, den);
       if rat == Ratio::new(new_num, new_den) {
         total_ratio = total_ratio * rat;
