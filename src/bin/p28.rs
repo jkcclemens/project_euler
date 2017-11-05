@@ -13,16 +13,16 @@
 
 extern crate project_euler;
 
-use project_euler::quadratics::general_quadratic;
+use project_euler::quadratics::gen_quadratic;
 
 fn main() {
   // The four diagonals are represented by four quadratic equations. Sum the values of those four
   // equations from [2, half any dimension of the spiral truncated] and add 1 to get the answer.
   let n = 1001 / 2;
-  let diagonals: [Vec<i64>; 4] = [(2..n + 2).map(|x| general_quadratic(4, -10, 7, x)).collect(),
-                  (2..n + 2).map(|x| general_quadratic(4, -8, 5, x)).collect(),
-                  (2..n + 2).map(|x| general_quadratic(4, -6, 3, x)).collect(),
-                  (2..n + 2).map(|x| general_quadratic(4, -4, 1, x)).collect()];
+  let diagonals: [Vec<i64>; 4] = [(2..n + 2).map(|x| gen_quadratic(4, -10, 7, x)).collect(),
+                  (2..n + 2).map(|x| gen_quadratic(4, -8, 5, x)).collect(),
+                  (2..n + 2).map(|x| gen_quadratic(4, -6, 3, x)).collect(),
+                  (2..n + 2).map(|x| gen_quadratic(4, -4, 1, x)).collect()];
   let sum: i64 = diagonals.into_iter()
     .flat_map(|x| x)
     .sum();

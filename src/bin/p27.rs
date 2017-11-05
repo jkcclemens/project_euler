@@ -20,13 +20,13 @@
 extern crate project_euler;
 
 use project_euler::primality::is_prime;
-use project_euler::quadratics::general_quadratic;
+use project_euler::quadratics::gen_quadratic;
 
 fn main() {
   let mut max_primes = (0, 0, 0);
   for a in -999..1000 {
     for b in -1000..1001 {
-      let primes = (0..).map(|n| general_quadratic(1, a, b, n)).take_while(is_prime).count();
+      let primes = (0..).map(|n| gen_quadratic(1, a, b, n)).take_while(is_prime).count();
       if primes > max_primes.2 {
         max_primes = (a, b, primes);
       }
