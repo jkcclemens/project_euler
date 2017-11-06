@@ -7,3 +7,4 @@ pub mod primality;
 pub mod factors;
 pub mod precision;
 pub mod quadratics;
+pub mod palindrome;
