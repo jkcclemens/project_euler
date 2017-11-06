@@ -10,8 +10,10 @@
 // HINT: Some products can be obtained in more than one way so be sure to only include it once in
 // your sum.
 
+extern crate project_euler;
 extern crate permutohedron;
 
+use project_euler::combine;
 use permutohedron::LexicalPermutation;
 use std::collections::HashSet;
 
@@ -30,19 +32,19 @@ fn main() {
     if multiplicand.is_empty() || multiplicand.contains(&Kind::Equals) {
       continue;
     }
-    let multiplicand = combine(multiplicand);
+    let multiplicand = kind_combine(multiplicand);
 
     let multiplier = &nums[mult_pos + 1..eq_pos];
     if multiplier.is_empty() {
       continue;
     }
-    let multiplier = combine(multiplier);
+    let multiplier = kind_combine(multiplier);
 
     let eq = &nums[eq_pos + 1..];
     if eq.is_empty() {
       continue;
     }
-    let eq = combine(eq);
+    let eq = kind_combine(eq);
 
     if multiplicand * multiplier == eq {
       products.insert(eq);
@@ -69,10 +71,6 @@ impl Kind {
   }
 }
 
-fn combine(x: &[Kind]) -> i64 {
-  x.into_iter()
-    .map(|k| k.num().unwrap())
-    .rev()
-    .fold((1, 0), |parts, i| (parts.0 * 10, i * parts.0 + parts.1))
-    .1
+fn kind_combine(x: &[Kind]) -> i64 {
+  combine(&x.into_iter().map(|k| k.num().unwrap()).collect::<Vec<_>>())
 }
